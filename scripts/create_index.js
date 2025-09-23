@@ -2,26 +2,27 @@ const _ = require('lodash');
 const child_process = require('child_process');
 const config = require('pelias-config').generate();
 const { Client } = require('@opensearch-project/opensearch');
+const es = require('elasticsearch');
 const cli = require('./cli');
 const schema = require('../schema');
 
 const SUPPORTED_ES_VERSIONS = '>=7.4.2';
 const SUPPORTED_OS_VERSIONS = '>=1.0.0';   // OpenSearch forked at ES 7.10.2, so treat >=1.0.0 as valid
 
+if (!config.esclient.hosts || config.esclient.hosts.length < 1 || !config.esclient.hosts[0].host) {
+  console.error(`Insufficient config`);
+  process.exit(1);
+}
+const hostInfo = config.esclient.hosts[0];
+const dist = hostInfo.host;  // 'elasticsearch' or 'opensearch'
 
 cli.header("create index");
 
-console.log("config esclient", config.esclient);
-
-const client = new Client({
-  node: 'http://opensearch:9200'
-});
-
 (async function run() {
   // check minimum elasticsearch versions before continuing
-  const res = await client.info();
-  const dist = _.get(res, 'body.version.distribution', 'elasticsearch');
+  let client;
   if (dist === 'opensearch') {
+    client = new Client({ node: `${hostInfo.protocol}://${hostInfo.host}:${hostInfo.port}`}); // Ex: {node: 'http://opensearch:9200'}
     try {
       child_process.execSync(`node ${__dirname}/check_version.js "${SUPPORTED_OS_VERSIONS}"`);
     } catch (e) {
@@ -29,6 +30,7 @@ const client = new Client({
       process.exit(1);
     }
   } else {
+    client = new es.Client(config.esclient);
     try {
       child_process.execSync(`node ${__dirname}/check_version.js "${SUPPORTED_ES_VERSIONS}"`);
     } catch (e) {

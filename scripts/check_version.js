@@ -1,12 +1,24 @@
 const _ = require('lodash');
 const semver = require('semver');
 const { Client } = require('@opensearch-project/opensearch');
+const es = require('elasticsearch');
 const config = require('pelias-config').generate();
 const cli = require('./cli');
 
-const client = new Client({
-  node: 'http://opensearch:9200'
-});
+if (!config.esclient.hosts || config.esclient.hosts.length < 1 || !config.esclient.hosts[0].host) {
+  console.error(`Insufficient config`);
+  process.exit(1);
+}
+const hostInfo = config.esclient.hosts[0];
+const dist = hostInfo.host;  // 'elasticsearch' or 'opensearch'
+
+let client;
+
+if (dist === 'opensearch') {
+  client = new Client({ node: `${hostInfo.protocol}://${hostInfo.host}:${hostInfo.port}`}); // Ex: {node: 'http://opensearch:9200'}
+} else {
+  client = new es.Client(config.esclient);
+}
 
 // pass target elastic version semver as the first CLI arg
 const targetVersion = process.argv[2];
