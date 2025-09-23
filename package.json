@@ -5,6 +5,7 @@
   "description": "Elasticsearch schema files and tooling for Pelias",
   "homepage": "https://github.com/pelias/schema",
   "license": "MIT",
+  "type": "commonjs",
   "main": "schema.js",
   "scripts": {
     "test": "./bin/test",

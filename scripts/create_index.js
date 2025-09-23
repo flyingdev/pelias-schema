@@ -1,14 +1,18 @@
 const child_process = require('child_process');
 const config = require('pelias-config').generate();
-const es = require('elasticsearch');
-const SUPPORTED_ES_VERSIONS = '>=7.4.2';
-
+const { Client } = require('@opensearch-project/opensearch');
 const cli = require('./cli');
 const schema = require('../schema');
 
+const SUPPORTED_ES_VERSIONS = '>=7.4.2';
+
 cli.header("create index");
 
-const client = new es.Client(config.esclient);
+console.log("config esclient", config.esclient);
+
+const client = new Client({
+  node: 'http://opensearch:9200'
+});
 
 // check minimum elasticsearch versions before continuing
 try {
@@ -32,11 +36,14 @@ const req = {
   body: schema,
 };
 
-client.indices.create(req, (err, res) => {
-  if (err) {
-    console.error(err.message || err, '\n');
+// 👇 wrap async work in an IIFE
+(async function run() {
+  try {
+    await client.indices.create(req);
+    console.log(`Index '${indexName}' created successfully.`);
+    process.exit(0);
+  } catch (err) {
+    console.error(`Error creating index '${indexName}':`, err);
     process.exit(1);
   }
-  console.log('[put mapping]', '\t', indexName, res, '\n');
-  process.exit(0);
-});
+})();
