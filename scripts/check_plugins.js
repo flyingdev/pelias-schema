@@ -1,24 +1,10 @@
 const colors = require('colors/safe');
-const config = require('pelias-config').generate();
-const es = require('elasticsearch');
-const { Client } = require('@opensearch-project/opensearch');
+const { createSearchClient } = require('../helpers/searchClient');
+const client = createSearchClient();
 const cli = require('./cli');
 
+const clientType = (process.env.PELIAS_OPENSEARCH === 'true') ? 'opensearch' : 'elasticsearch';
 
-if (!config.esclient.hosts || config.esclient.hosts.length < 1 || !config.esclient.hosts[0].host) {
-  console.error(`Insufficient config`);
-  process.exit(1);
-}
-const hostInfo = config.esclient.hosts[0];
-const dist = hostInfo.host;  // 'elasticsearch' or 'opensearch'
-
-let client;
-
-if (dist === 'opensearch') {
-  client = new Client({ node: `${hostInfo.protocol}://${hostInfo.host}:${hostInfo.port}`}); // Ex: {node: 'http://opensearch:9200'}
-} else {
-  client = new es.Client(config.esclient);
-}
 
 // mandatory plugins
 const required = ['analysis-icu'];
@@ -34,7 +20,7 @@ let failures = [];
     process.exit(1);
   }
 
-  cli.header(`checking ${dist} plugins`);
+  cli.header(`checking ${clientType} plugins`);
 
   // iterate over all nodes in cluster
   for( const uid in res.nodes ) {
