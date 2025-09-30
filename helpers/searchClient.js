@@ -5,10 +5,18 @@ const { Client: ElasticClient } = require('elasticsearch');
 
 /**
  * Create a search client for either OpenSearch or Elasticsearch.
- * 
- * OpenSearch selection rules:
- *  - If PELIAS_OPENSEARCH=true, prefer OPENSEARCH_NODE env
- *  - Else fall back to pelias.json esclient.hosts[0]
+ *
+ * ⚠️ Note on config:
+ *   We reuse the existing `esclient` block from pelias.json for both Elasticsearch
+ *   and OpenSearch. This avoids introducing a second top-level key like `osclient`.
+ *   If Pelias were designed from scratch today, we might separate them, but for
+ *   backward compatibility and simplicity, `esclient` is shared.
+ *
+ * Selection rules:
+ *   - If PELIAS_OPENSEARCH=true → use OpenSearch
+ *       - Prefer OPENSEARCH_NODE env var
+ *       - Else fall back to esclient.hosts[0] in pelias.json
+ *   - Else → use Elasticsearch client with esclient config
  */
 function createSearchClient() {
   if (process.env.PELIAS_OPENSEARCH === 'true') {
