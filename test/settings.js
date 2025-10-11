@@ -647,7 +647,7 @@ module.exports.tests.index = function(test, common) {
     var s = settings();
     t.equal(typeof s.index, 'object', 'index specified');
     t.equal(s.index.number_of_replicas, "0", 'replicas will increase index time');
-    t.equal(s.index.number_of_shards, "1", 'sharding value should equal to the settings value');
+    t.equal(s.index.number_of_shards, "3", 'sharding value should equal to the settings value');
     t.end();
   });
 };
