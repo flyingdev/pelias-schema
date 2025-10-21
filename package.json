@@ -32,6 +32,7 @@
     "@hapi/joi": "^16.1.8",
     "@opensearch-project/opensearch": "^3.5.1",
     "colors": "^1.1.2",
+    "dotenv": "^17.2.3",
     "elasticsearch": "^16.0.0",
     "glob": "^7.1.6",
     "lodash": "^4.17.15",
