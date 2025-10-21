@@ -1,3 +1,4 @@
+require('dotenv').config();
 const colors = require('colors/safe');
 const { createSearchClient } = require('../helpers/searchClient');
 const client = createSearchClient();

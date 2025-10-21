@@ -1,4 +1,5 @@
 // helpers/searchClient.js
+require('dotenv').config();
 const config = require('pelias-config').generate();
 const { Client: OpenSearchClient } = require('@opensearch-project/opensearch');
 const { Client: ElasticClient } = require('elasticsearch');

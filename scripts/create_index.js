@@ -1,3 +1,4 @@
+require('dotenv').config();
 const _ = require('lodash');
 const child_process = require('child_process');
 const config = require('pelias-config').generate();

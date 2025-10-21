@@ -1,3 +1,4 @@
+require('dotenv').config();
 const _ = require('lodash');
 const semver = require('semver');
 const { createSearchClient } = require('../helpers/searchClient');
