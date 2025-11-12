@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@hapi/joi": "^16.1.8",
-    "@opensearch-project/opensearch": "^3.5.1",
+    "@opensearch-project/opensearch": "^1.2.0",
     "colors": "^1.1.2",
     "dotenv": "^17.2.3",
     "elasticsearch": "^16.0.0",
