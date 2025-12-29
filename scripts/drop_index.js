@@ -1,6 +1,6 @@
 const colors = require('colors/safe');
 const config = require('pelias-config').generate();
-const { createSearchClient } = require('../helpers/searchClient');
+const { createSearchClient, getDatabaseConfig } = require('../helpers/searchClient');
 const client = createSearchClient();
 const readline = require('readline');
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
@@ -19,8 +19,9 @@ function drop() {
 
 // check all hosts to see if any is not localhost
 function warnIfNotLocal() {
-  if (config.esclient.hosts.some((env) => { return env.host !== 'localhost'; })) {
-    console.log(colors.red(`WARNING: DROPPING SCHEMA NOT ON LOCALHOST: ${config.esclient.hosts[0].host}`));
+  const { hosts } = getDatabaseConfig();
+  if (hosts.some((env) => { return env.host !== 'localhost'; })) {
+    console.log(colors.red(`WARNING: DROPPING SCHEMA NOT ON LOCALHOST: ${hosts[0].host}`));
   }
 }
 

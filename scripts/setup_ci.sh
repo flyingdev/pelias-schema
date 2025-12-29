@@ -28,7 +28,7 @@ wget -O - "https://artifacts.elastic.co/downloads/elasticsearch/${FILENAME}" \
 source "${BASH_SOURCE%/*}/elastic_wait.sh"
 (elastic_wait)
 
-# set the correct esclient.apiVersion in pelias.json
+# set the correct dbclient.apiVersion in pelias.json
 v=( ${ES_VERSION//./ } ) # split version number on '.'
 
 # generate a pelias.json config
@@ -36,7 +36,7 @@ PELIAS_CONFIG=$(
   jq -n \
     --arg apiVersion "${v[0]}.${v[1]}" \
     '{
-      esclient: {
+      dbclient: {
         apiVersion: $apiVersion
       }
     } | del(.. | select(. == ""))'

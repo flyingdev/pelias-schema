@@ -8,7 +8,7 @@ const common = {
   clientOpts: {
     host: 'localhost:9200',
     keepAlive: true,
-    apiVersion: config.esclient.apiVersion
+    apiVersion: config.dbclient.apiVersion
   },
   create: {
     schema: schema,

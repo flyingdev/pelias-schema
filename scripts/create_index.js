@@ -14,8 +14,9 @@ const SUPPORTED_OS_VERSIONS = '>=1.0.0';   // OpenSearch forked at ES 7.10.2, so
 cli.header("create index");
 
 (async function run() {
+  const { engine } = getDatabaseConfig();
   // check minimum opensearch/elasticsearch versions before continuing
-  if (process.env.PELIAS_OPENSEARCH === 'true') {
+  if (engine === 'opensearch') {
     try {
       child_process.execSync(`node ${__dirname}/check_version.js "${SUPPORTED_OS_VERSIONS}"`);
     } catch (e) {
