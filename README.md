@@ -22,9 +22,9 @@ Pelias is a search engine for places worldwide, powered by open data. It turns a
 We think open data, open source, and open strategy win over proprietary solutions at any part of the stack and we want to ensure the services we offer are in line with that vision. We believe that an open geocoder improves over the long-term only if the community can incorporate truly representative local knowledge.
 </details>
 
-# Pelias Elasticsearch Schema Definition
+# Pelias OpenSearch Schema Definition
 
-This package defines the Elasticsearch schema used by Pelias. Pelias requires quite a few settings for performance and accuracy. This repository contains those settings as well as useful tools to ensure they are applied correctly.
+This package defines the OpenSearch schema used by Pelias. Pelias requires quite a few settings for performance and accuracy. This repository contains those settings as well as useful tools to ensure they are applied correctly.
 
 ## Requirements
 
@@ -70,7 +70,7 @@ Use this script to pretty-print the schema's mappings to stdout.
 node scripts/output_mapping.js
 ```
 
-#### check all mandatory elasticsearch plugins are correctly installed
+#### check all mandatory opensearch plugins are correctly installed
 
 Print a list of which plugins are installed and how to install any that are missing.
 
@@ -86,7 +86,7 @@ Like the rest of Pelias, the Pelias schema can be configured through a `pelias.j
 
 #### `schema.indexName`
 
-This allows configuring the name of the index created in Elasticsearch. The default is `pelias`.
+This allows configuring the name of the index created in OpenSearch. The default is `pelias`.
 
 **Note:** All Pelias importers also use this configuration value to determine what index to _write_ to. Additionally, the Pelias API uses the related [`api.indexName`](https://github.com/pelias/api#configuration-via-pelias-config) parameter to determine where to _read_ from.
 
@@ -103,7 +103,7 @@ synonyms/custom_street.txt
 
 You must edit the files **before** running `create_index.js`, any changes made to the files will require you to drop and recreate the index before those synonyms are available.
 
-Synonyms are only used at index-time. The filename contains the name of the elasticsearch field which the synonyms will apply. ie. `custom_name` will apply to the `name.*` fields, `custom_street` will apply to the `address_parts.name` field and `custom_admin` will apply to the `parent.*` fields.
+Synonyms are only used at index-time. The filename contains the name of the opensearch field which the synonyms will apply. ie. `custom_name` will apply to the `name.*` fields, `custom_street` will apply to the `address_parts.name` field and `custom_admin` will apply to the `parent.*` fields.
 
 see: https://github.com/pelias/schema/pull/273 for more info.
 
@@ -136,15 +136,15 @@ $ npm test
 
 ### Running Integration Tests
 
-Requires a running elasticsearch server (no other setup required)
+Requires a running opensearch server (no other setup required)
 
 ```bash
 $ npm run integration
 ```
 
-### Running elasticsearch in Docker (for testing purposes)
+### Running opensearch in Docker (for testing purposes)
 
-Download the image and start an elasticsearch docker container:
+Download the image and start an opensearch docker container:
 
 ```bash
 $ docker run --rm --name elastic-test -p 9200:9200 pelias/elasticsearch:7.5.1

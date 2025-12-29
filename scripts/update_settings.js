@@ -6,7 +6,7 @@ var schema = require('../schema');
 
 var _index = config.schema.indexName;
 
-// Error: ElasticsearchIllegalArgumentException[can't change the number of shards for an index
+// Error: OpenSearchIllegalArgumentException[can't change the number of shards for an index
 if (schema.settings.hasOwnProperty('index') &&
   schema.settings.index.hasOwnProperty('number_of_shards')) {
   delete schema.settings.index.number_of_shards;

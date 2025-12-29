@@ -24,6 +24,6 @@ function elastic_wait(){
   done
 
   echo
-  echo "Elasticsearch did not come up, check configuration"
+  echo "OpenSearch did not come up, check configuration"
   exit 1
 }

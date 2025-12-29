@@ -5,7 +5,7 @@ const _ = require('lodash');
  * This tokenizer improves word-splitting of non-latin alphabets (particularly Asian languages).
  * 
  * It can be enabled by setting `config.schema.icuTokenizer` in your `pelias.json` config.
- * Note: this must be set *before* you create your elasticsearch index or it will have no effect.
+ * Note: this must be set *before* you create your opensearch index or it will have no effect.
  * 
  * This feature is considered beta, we encourage testing & feedback from the community in order 
  * to adopt the ICU tokenizer as our default.

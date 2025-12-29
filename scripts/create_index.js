@@ -14,12 +14,12 @@ const SUPPORTED_OS_VERSIONS = '>=1.0.0';   // OpenSearch forked at ES 7.10.2, so
 cli.header("create index");
 
 (async function run() {
-  // check minimum elasticsearch versions before continuing
+  // check minimum opensearch/elasticsearch versions before continuing
   if (process.env.PELIAS_OPENSEARCH === 'true') {
     try {
       child_process.execSync(`node ${__dirname}/check_version.js "${SUPPORTED_OS_VERSIONS}"`);
     } catch (e) {
-      console.error(`unsupported elasticsearch version. try: ${SUPPORTED_OS_VERSIONS}\n`);
+      console.error(`unsupported opensearch version. try: ${SUPPORTED_OS_VERSIONS}\n`);
       process.exit(1);
     }
   } else {
@@ -50,7 +50,7 @@ cli.header("create index");
     console.log(`Index '${indexName}' created successfully.`);
     process.exit(0);
   } catch (err) {
-    console.error(`Error creating index '${indexName}':`, err);
+    console.error(`Error creating index '${indexName}':`, JSON.stringify(err, null, 2));
     process.exit(1);
   }
 })();

@@ -270,7 +270,7 @@ function generate(){
   // each filter is given the same name as the file, paths separators are replaced with
   // underscores and the file extension is removed.
   // note: if no synonym entries are present in the list we use an array
-  // containing an empty space to avoid elasticsearch schema parsing errors.
+  // containing an empty space to avoid opensearch schema parsing errors.
   _.each(synonyms, (entries, name) => {
 
     // same tokenizer regex as above except without comma
@@ -298,7 +298,7 @@ function generate(){
   }
 
   // Merge settings from pelias/config
-  settings = _.merge({}, settings, _.get(config, 'elasticsearch.settings', {}));
+  settings = _.merge({}, settings, _.get(config, 'opensearch.settings', {}));
 
   return settings;
 }

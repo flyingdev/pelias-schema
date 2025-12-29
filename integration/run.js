@@ -30,7 +30,7 @@ const common = {
   bucketTokens: tokens => {
     const positions = {};
     tokens.forEach((t, i) => {
-      // format returned by elasticsearch
+      // format returned by opensearch
       if (_.isPlainObject(t)) {
         const pos = '@pos' + t.position;
         if (!positions[pos]) { positions[pos] = []; }

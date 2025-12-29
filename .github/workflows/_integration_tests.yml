@@ -16,7 +16,7 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Start elasticsearch ${{ matrix.es-version }}
+    - name: Start opensearch ${{ matrix.es-version }}
       env:
         ES_VERSION: ${{ matrix.es-version }}
       run: ./scripts/setup_ci.sh
