@@ -7,7 +7,7 @@ module.exports.tests = {};
 module.exports.tests.interface = function(test, common) {
   test('config without schema should throw error', function(t) {
     var config = {
-      dbcilent: {}
+      dbclient: {}
     };
 
     t.throws(function() {
@@ -20,7 +20,7 @@ module.exports.tests.interface = function(test, common) {
   test('config without schema.indexName should throw error', function(t) {
     var config = {
       schema: {},
-      dbcilent: {}
+      dbclient: {}
     };
 
     t.throws(function() {
@@ -36,7 +36,7 @@ module.exports.tests.interface = function(test, common) {
         schema: {
           indexName: value,
         },
-        dbcilent: {}
+        dbclient: {}
       };
 
       t.throws(function() {
@@ -49,18 +49,18 @@ module.exports.tests.interface = function(test, common) {
 
   });
 
-  test('config with non-object dbcilent should throw error', function(t) {
+  test('config with non-object dbclient should throw error', function(t) {
     [null, 17, [], 'string', true].forEach((value) => {
       var config = {
         schema: {
           indexName: 'example_index',
         },
-        dbcilent: value
+        dbclient: value
       };
 
       t.throws(function() {
         configValidation.validate(config);
-      }, /"dbcilent" must be of type object/, 'dbcilent should be an object');
+      }, /"dbclient" must be of type object/, 'dbclient should be an object');
 
     });
 
@@ -68,12 +68,12 @@ module.exports.tests.interface = function(test, common) {
 
   });
 
-  test('config with string schema.indexName and object dbcilent should not throw error', function(t) {
+  test('config with string schema.indexName and object dbclient should not throw error', function(t) {
     var config = {
       schema: {
         indexName: 'example_index',
       },
-      dbcilent: {}
+      dbclient: {}
     };
 
     t.doesNotThrow(function() {
