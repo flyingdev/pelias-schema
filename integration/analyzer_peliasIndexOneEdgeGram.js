@@ -1,7 +1,7 @@
 // validate analyzer is behaving as expected
 
 const tape = require('tape'),
-    Suite = require('../test/elastictest/Suite'),
+    Suite = require('../test/opensearchtest/Suite'),
     punctuation = require('../punctuation'),
     config = require('pelias-config').generate();
 

@@ -4,7 +4,7 @@
 // The greater issue is descriped in: https://github.com/pelias/pelias/issues/211
 // The cases tested here are described in: https://github.com/pelias/schema/issues/105
 
-const Suite = require('../test/elastictest/Suite');
+const Suite = require('../test/opensearchtest/Suite');
 const config = require('pelias-config').generate();
 
 const getTotalHits = require('./_hits_total_helper');

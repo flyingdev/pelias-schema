@@ -1,6 +1,6 @@
 // http://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-root-object-type.html#_dynamic_templates
 
-const Suite = require('../test/elastictest/Suite');
+const Suite = require('../test/opensearchtest/Suite');
 const config = require('pelias-config').generate();
 
 module.exports.tests = {};

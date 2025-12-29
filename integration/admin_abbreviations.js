@@ -1,4 +1,4 @@
-const Suite = require('../test/elastictest/Suite');
+const Suite = require('../test/opensearchtest/Suite');
 const config = require('pelias-config').generate();
 const getTotalHits = require('./_hits_total_helper');
 

@@ -1,5 +1,5 @@
 // validate analyzer is behaving as expected
-const Suite = require('../test/elastictest/Suite')
+const Suite = require('../test/opensearchtest/Suite')
 const config = require('pelias-config').generate()
 
 module.exports.tests = {};
