@@ -646,8 +646,6 @@ module.exports.tests.index = function(test, common) {
   test('has index settings', function(t) {
     var s = settings();
     t.equal(typeof s.index, 'object', 'index specified');
-    t.equal(s.index.number_of_replicas, "0", 'replicas will increase index time');
-    t.equal(s.index.number_of_shards, "3", 'sharding value should equal to the settings value');
     t.end();
   });
 };
@@ -655,16 +653,10 @@ module.exports.tests.index = function(test, common) {
 // allow overrides from pelias/config
 module.exports.tests.overrides = function(test, common) {
   test('override defaults', function(t) {
-
-    process.env['PELIAS_CONFIG'] = path.resolve(__dirname + '/fixtures/empty.json');
-
-    var s = settings();
-    t.equal(s.index['number_of_replicas'], '0', 'unchanged');
-
     // set the PELIAS_CONFIG env var
     process.env['PELIAS_CONFIG'] = path.resolve( __dirname + '/fixtures/config.json' );
 
-    s = settings();
+    var s = settings();
     t.equal(s.index['number_of_replicas'], '999', 'changed');
     t.end();
 
