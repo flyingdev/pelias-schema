@@ -25,8 +25,8 @@ wget -O - "https://artifacts.elastic.co/downloads/elasticsearch/${FILENAME}" \
 
 # wait for server to boot up
 # logs show that on travis-ci it can take ~17s to boot an ES6 server
-source "${BASH_SOURCE%/*}/elastic_wait.sh"
-(elastic_wait)
+source "${BASH_SOURCE%/*}/opensearch_wait.sh"
+(opensearch_wait)
 
 # set the correct dbclient.apiVersion in pelias.json
 v=( ${ES_VERSION//./ } ) # split version number on '.'

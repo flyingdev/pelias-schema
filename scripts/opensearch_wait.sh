@@ -1,6 +1,6 @@
 set -e
 
-function elastic_status(){
+function opensearch_status(){
   curl \
     --output /dev/null \
     --silent \
@@ -8,13 +8,13 @@ function elastic_status(){
     "http://${ELASTIC_HOST:-localhost:9200}" || true;
 }
 
-function elastic_wait(){
-  echo 'waiting for elasticsearch service to come up';
+function opensearch_wait(){
+  echo 'waiting for opensearch service to come up';
   retry_count=30
 
   i=1
   while [[ "$i" -le "$retry_count" ]]; do
-    if [[ $(elastic_status) -eq 200 ]]; then
+    if [[ $(opensearch_status) -eq 200 ]]; then
       echo
       exit 0
     fi

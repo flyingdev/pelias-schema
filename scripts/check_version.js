@@ -11,7 +11,7 @@ if (!hosts || hosts.length < 1 || !hosts[0].host) {
   process.exit(1);
 }
 
-// pass target elastic version semver as the first CLI arg
+// pass target opensearch version semver as the first CLI arg
 const targetVersion = process.argv[2];
 if (!targetVersion) {
   console.error(`you must pass a target ${engine} version semver as the first argument`);
