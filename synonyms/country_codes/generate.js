@@ -40,7 +40,7 @@ const mapper = (row) => {
 
 /**
  * generate a iso3166 alpha2 <> alpha3 country code synonyms
- * file compatible with elasticsearch.
+ * file compatible with opensearch.
  */
 
 fs.writeFileSync(filename, '# iso3166 alpha2 <> alpha3 country code synonyms\n');

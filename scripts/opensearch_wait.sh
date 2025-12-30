@@ -5,7 +5,7 @@ function opensearch_status(){
     --output /dev/null \
     --silent \
     --write-out "%{http_code}" \
-    "http://${ELASTIC_HOST:-localhost:9200}" || true;
+    "http://${OPENSEARCH_HOST:-localhost:9200}" || true;
 }
 
 function opensearch_wait(){

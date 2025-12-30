@@ -1,6 +1,6 @@
 const _ = require('lodash')
 const randomstring = require('randomstring')
-const elasticsearch = require('elasticsearch')
+const { Client: OpenSearchClient } = require('@opensearch-project/opensearch');
 const async = require('async')
 
 function Suite (clientOpts, props) {
@@ -26,7 +26,7 @@ Suite.prototype.assert = function (assert) {
 }
 
 Suite.prototype.start = function (cb) {
-  this.client = new elasticsearch.Client(this.clientOpts)
+  this.client = new OpenSearchClient(this.clientOpts)
   cb()
 }
 
@@ -93,9 +93,6 @@ Suite.prototype.run = function (cb) {
   })
 }
 
-// elasticsearch client requires that config objects not be reused.
-// Error: Do not reuse objects to configure the elasticsearch Client class:
-// https://github.com/elasticsearch/elasticsearch-js/issues/33
 function clone (obj) {
   return JSON.parse(JSON.stringify(obj))
 }

@@ -147,7 +147,7 @@ $ npm run integration
 Download the image and start an opensearch docker container:
 
 ```bash
-$ docker run --rm --name elastic-test -p 9200:9200 pelias/elasticsearch:7.5.1
+$ docker run --rm --name opensearch-test -p 9200:9200 opensearchproject/opensearch:1.3.17
 ```
 
 ### Continuous Integration
