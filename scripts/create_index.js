@@ -4,8 +4,9 @@ const child_process = require('child_process');
 const config = require('pelias-config').generate();
 const cli = require('./cli');
 const schema = require('../schema');
-const { createSearchClient } = require('../helpers/searchClient');
+const { getDatabaseConfig, createSearchClient } = require('../helpers/searchClient');
 
+const { engine } = getDatabaseConfig();
 const client = createSearchClient();
 
 const SUPPORTED_ES_VERSIONS = '>=7.4.2';
@@ -14,7 +15,6 @@ const SUPPORTED_OS_VERSIONS = '>=1.0.0';   // OpenSearch forked at ES 7.10.2, so
 cli.header("create index");
 
 (async function run() {
-  const { engine } = getDatabaseConfig();
   // check minimum opensearch/elasticsearch versions before continuing
   if (engine === 'opensearch') {
     try {
